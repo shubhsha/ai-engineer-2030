@@ -1,0 +1,5 @@
+# Normalize line endings: shell scripts and git hooks break with CRLF, and
+# the book prints some files by line range.
+* text=auto eol=lf
+*.png binary
+*.db binary

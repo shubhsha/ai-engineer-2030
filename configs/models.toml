@@ -1,0 +1,55 @@
+# Model catalog used by ai_engineer.claude (routing, cost, budgets).
+#
+# List prices from the provider's pricing page, checked on the date below.
+# PRICES CHANGE. Before you make a decision with these numbers, check the
+# current page, update this file and commit it with the new date.
+#
+# Units: USD per million tokens (MTok). Cache and batch multipliers are
+# applied in code (see ai_engineer/claude/cost.py):
+#   cache write, 5-minute TTL = 1.25 x input    batch = 0.50 x everything
+#   cache write, 1-hour TTL   = 2.00 x input
+#   cache read = cache_read_multiplier x input (default 0.10)
+# A model priced by prompt length has a long_prompt table: a prompt of
+# more than `above` tokens pays those prices for the whole call, and the
+# multipliers apply to them.
+
+prices_checked = "2026-10-08"
+
+[[model]]
+id = "claude-fable-5-1"
+tier = "frontier"
+context_window = 1_000_000
+input_per_mtok = 10.0
+output_per_mtok = 50.0
+cache_read_multiplier = 0.025
+
+[[model]]
+id = "claude-opus-5-5"
+tier = "large"
+context_window = 1_000_000
+input_per_mtok = 4.0
+output_per_mtok = 20.0
+cache_read_multiplier = 0.05
+
+[[model]]
+id = "claude-sonnet-5-5"
+tier = "medium"
+context_window = 1_000_000
+input_per_mtok = 2.0
+output_per_mtok = 10.0
+cache_read_multiplier = 0.05
+
+[[model]]
+id = "claude-haiku-4-5-20251001"
+tier = "small"
+context_window = 200_000
+input_per_mtok = 1.0
+output_per_mtok = 5.0
+
+[[model]]
+id = "claude-haiku-5-5"
+tier = "small"
+context_window = 1_000_000
+input_per_mtok = 0.10
+output_per_mtok = 0.50
+long_prompt = { above = 100_000, input_per_mtok = 0.50, output_per_mtok = 2.50 }

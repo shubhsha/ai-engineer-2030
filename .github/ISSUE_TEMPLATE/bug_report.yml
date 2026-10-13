@@ -1,0 +1,55 @@
+name: Bug report
+description: Code in this repository does not behave as its tests or the book say.
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thank you for reporting. Please do not include secrets, API keys or
+        real customer data. Security problems go through private reporting
+        in the Security tab, never in an issue.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you ran, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The smallest commands or code that show the problem.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: The error or test output, copied as text.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The output of `.venv/bin/aie --version`, or a commit hash.
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - macOS
+        - Linux
+        - Windows (WSL 2)
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: "3.13.2"

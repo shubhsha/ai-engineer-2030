@@ -1,0 +1,23 @@
+{
+  "name": "ai-engineer-2030",
+  "image": "mcr.microsoft.com/devcontainers/python:3.14-trixie",
+  "features": {
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+  },
+  "mounts": [
+    "source=aie2030-venv-${devcontainerId},target=${containerWorkspaceFolder}/.venv,type=volume"
+  ],
+  "postCreateCommand": "sudo chown vscode .venv && make install-all",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "charliermarsh.ruff"],
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true
+        }
+      }
+    }
+  }
+}

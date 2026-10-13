@@ -1,0 +1,34 @@
+name: Erratum
+description: A mistake in the book, or a place where the book and the code disagree.
+title: "erratum: "
+labels: ["erratum"]
+body:
+  - type: input
+    id: edition
+    attributes:
+      label: Edition and format
+      placeholder: "Complete Edition, PDF"
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Chapter and page
+      description: The chapter number and title, and the printed page number.
+      placeholder: "Chapter 9, APIs and Contracts, page ..."
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: What the book says
+      description: Quote the sentence, listing or figure caption.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What it should say, and why
+      description: Link to a source, a test or a file in this repository if you can.
+    validations:
+      required: true

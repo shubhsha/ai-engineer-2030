@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # Dependency ranges in pyproject.toml. Updates arrive as one weekly
+  # pull request, and CI runs the full suite on it.
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      python:
+        patterns: ["*"]
+    commit-message:
+      prefix: build
+      include: scope
+
+  # The pinned action SHAs in .github/workflows.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
+      include: scope

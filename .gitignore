@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+htmlcov/
+
+# Secrets never live in the repo
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+
+# The book's sources and the built PDF are not part of this repository
+book/
+dist/
+
+# Local data produced by examples
+data/local/
+*.db
+*.sqlite3
+!data/synthetic/*.db
+
+# Personal Claude Code settings and notes
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/

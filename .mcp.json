@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "warehouse": {
+      "type": "stdio",
+      "command": ".venv/bin/python",
+      "args": [
+        "-m",
+        "ai_engineer.mcp_server.warehouse",
+        "--db",
+        "data/local/shop.db",
+        "--create-demo"
+      ]
+    }
+  }
+}

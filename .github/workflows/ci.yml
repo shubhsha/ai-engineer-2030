@@ -1,0 +1,86 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # The same entry points a developer runs locally: `make install`, then
+  # `make check` (lint, types, tests). Core dependencies only, so this job
+  # also proves that the optional extras stay optional.
+  check:
+    name: check (py${{ matrix.python }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install
+        run: make install PY=python
+      - name: Lint, types and tests
+        run: make check
+
+  # The Claude adapter, the MCP server and the HTTP service, with their
+  # optional dependencies installed. Still offline: no test calls a network.
+  extras:
+    name: extras (py3.14)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install
+        run: make install-all PY=python
+      - name: Types and tests, reporting any skips
+        run: |
+          make type
+          .venv/bin/pytest -q -rs
+
+  # Every commit in a pull request must follow Conventional Commits; the
+  # checker is the one Chapter 7 builds and the local commit-msg hook runs.
+  commits:
+    name: commit messages
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+      - name: Check every commit in the pull request
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          pip install -e .
+          status=0
+          for sha in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            git log -1 --format=%B "$sha" > "$RUNNER_TEMP/message"
+            python -m ai_engineer.foundations.commitmsg "$RUNNER_TEMP/message" \
+              || { echo "in commit $sha"; status=1; }
+          done
+          exit "$status"
