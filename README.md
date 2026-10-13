@@ -1,20 +1,41 @@
-# AI Engineer 2030: companion code
+<p align="center">
+  <img src="docs/cover.png" alt="AI Engineer 2030: The Architect's Field Guide" width="320">
+</p>
 
-[![CI](https://github.com/shubhsha/ai-engineer-2030/actions/workflows/ci.yml/badge.svg)](https://github.com/shubhsha/ai-engineer-2030/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Python 3.11 to 3.14](https://img.shields.io/badge/python-3.11%20to%203.14-blue.svg)
+<h1 align="center">AI Engineer 2030</h1>
+<p align="center"><b>The Architect's Field Guide</b><br>
+From Python programmer to AI systems engineer and staff engineer</p>
 
-This is the code for *AI Engineer 2030: The Architect's Field Guide* by
-Shubham Sharma, an Anthropic Certified Claude Architect Professional.
-The book's listings are printed from these files, so the code on the
-page is the same code that passes CI here.
+<p align="center">
+  <a href="https://github.com/shubhsha/ai-engineer-2030/releases/latest"><b>Download the complete book (PDF, free)</b></a>
+</p>
 
-## Read the book, free
+<p align="center">
+  <a href="https://github.com/shubhsha/ai-engineer-2030/actions/workflows/ci.yml"><img src="https://github.com/shubhsha/ai-engineer-2030/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/python-3.11%20to%203.14-blue.svg" alt="Python 3.11 to 3.14">
+  <img src="https://img.shields.io/badge/types-mypy%20strict-green.svg" alt="mypy strict">
+  <img src="https://img.shields.io/badge/tests-960%20offline-brightgreen.svg" alt="960 offline tests">
+</p>
 
-The complete edition (six volumes, 79 chapters, about 1,600 pages) is
-free to download from the
-[latest release](https://github.com/shubhsha/ai-engineer-2030/releases/latest).
-It is free for this launch. More focused books will follow.
+By **Shubham Sharma**, Anthropic Certified Claude Architect Professional.
+This is the code for the book. Its listings are printed from these
+files, so the code on the page is the same code that passes CI here.
+
+## The book
+
+Six volumes, 79 chapters and about 1,600 pages, free for this launch.
+Every chapter starts with the basics by hand, then the theory, then
+code you can run.
+
+| Vol. | Title | Chapters |
+|---|---|---|
+| I | Foundations: Python, systems and data | 1 to 13 |
+| II | AI Engineering: machine learning to LLMs | 14 to 25 |
+| III | Agentic AI: tools, memory, evals, MCP | 26 to 39 |
+| IV | Enterprise AI: testing, data, DevOps, governance, cost | 40 to 53 |
+| V | Staff and Principal: systems, decisions, leading teams | 54 to 67 |
+| VI | The Future Engineer: AI-native work, philosophy, career | 68 to 79 |
 
 It is written to be read. Modules are small and strictly typed. The
 tests run offline in a few seconds and give the same result on every
