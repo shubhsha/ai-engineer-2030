@@ -157,7 +157,8 @@ def blockwise_attention(
         total = total * shrink + p.sum(axis=-1, keepdims=True)
         acc = acc * shrink + p @ v[..., lo : lo + block, :]
         m = m_new
-    return acc / total
+    out: Array = acc / total
+    return out
 
 
 def kv_cache_bytes(

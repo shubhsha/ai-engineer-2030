@@ -82,7 +82,7 @@ def quantize_asymmetric(
 ) -> tuple[NDArray[np.uint8], float, int]:
     """Map [min, max] onto 0..2**bits-1; return codes, scale, zero point."""
     levels = 2**bits - 1
-    lo, hi = float(w.min()), float(w.max())
+    lo, hi = float(np.min(w)), float(np.max(w))
     scale = (hi - lo) / levels or 1.0
     zero = int(np.clip(round(-lo / scale), 0, levels))
     codes = np.clip(np.round(w / scale) + zero, 0, levels).astype(np.uint8)
