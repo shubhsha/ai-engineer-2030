@@ -28,7 +28,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-claude = ["anthropic>=1.11,<2"]
+claude = ["anthropic>=1.11,<3"]
 mcp = ["mcp>=2.3,<3"]
 api = ["fastapi>=0.115", "uvicorn>=0.30"]
 dev = [
